@@ -76,7 +76,7 @@ function Details() {
             </div>
             <h1>{item.title}</h1>
             <div className="details-container">
-              <p>Founder</p>
+              <p>Posted By</p>
               <p>{item.name}</p>
             </div>
 
