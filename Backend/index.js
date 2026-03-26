@@ -1,12 +1,13 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import express, { request } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import { Item } from "./models/itemmodel.js";
 import cors from "cors";
 import { createRequire } from "module";
-const require = createRequire(import.meta.url); //to require require for multer
+
+const require = createRequire(import.meta.url);
 
 const PORT = process.env.PORT || 8000;
 const mongoURL = process.env.MONGO_URI;
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/files", express.static("files"));
 
-//================================================== multer ==============================================
+// ===================== multer =====================
 
 const multer = require("multer");
 
@@ -32,7 +33,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// ============================== get =================================
+// ===================== GET ALL =====================
 
 app.get("/item", async (req, res) => {
     try {
@@ -46,10 +47,9 @@ app.get("/item", async (req, res) => {
     }
 });
 
-// ===============================post===================================
+// ===================== POST =====================
 
 app.post("/item", upload.single("file"), async (req, res) => {
-    console.log(req.file);
     try {
         if (
             !req.body.name ||
@@ -58,7 +58,7 @@ app.post("/item", upload.single("file"), async (req, res) => {
             !req.body.title ||
             !req.body.description
         ) {
-            return res.status(400).send({ message: "all fields sent" });
+            return res.status(400).send({ message: "all fields required" });
         }
 
         const newItem = {
@@ -69,6 +69,7 @@ app.post("/item", upload.single("file"), async (req, res) => {
             description: req.body.description,
             image: req.file.filename,
         };
+
         const item = await Item.create(newItem);
         return res.status(200).send(item);
     } catch (error) {
@@ -77,24 +78,22 @@ app.post("/item", upload.single("file"), async (req, res) => {
     }
 });
 
-// =================================-get id ==================================
+// ===================== GET BY ID =====================
 
 app.get("/item/:id", async (req, res) => {
     try {
-        const id = req.params.id;
-        const item = await Item.findById(id);
+        const item = await Item.findById(req.params.id);
         return res.status(200).json(item);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
 });
 
-// =================================== delete ============================
+// ===================== DELETE =====================
 
 app.delete("/item/:id", async (req, res) => {
     try {
-        const id = req.params.id;
-        const result = await Item.findByIdAndDelete(id);
+        const result = await Item.findByIdAndDelete(req.params.id);
         if (!result) {
             return res.status(404).send({ message: "Item not found" });
         }
@@ -104,6 +103,8 @@ app.delete("/item/:id", async (req, res) => {
         return res.status(500).send({ message: error.message });
     }
 });
+
+// ===================== START SERVER =====================
 
 app.listen(PORT, () => {
     console.log(`server started at port ${PORT}`);
