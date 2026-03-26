@@ -20,8 +20,8 @@ The Lost and Found Bulletin Board project is a community-driven initiative that 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/AkhilaGundeti/Lost-And-Found-Portal
-cd cd Lost-And-Found-Portal
+git clone https://github.com/Sanzzz1125/Lost_And_Found
+cd cd Lost_And_Found
 ```
 ### Install server dependencies
 ```console cd server
@@ -34,7 +34,7 @@ npm start
 ```
 ### Install client dependencies open another new gitbash window
 ```console
-cd Lost-And-Found-Portal/Frontend
+cd Lost_And_Found/Frontend
 npm install
 ```
 ### Start the client
