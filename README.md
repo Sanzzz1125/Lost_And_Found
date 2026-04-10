@@ -21,9 +21,6 @@ The Lost and Found Bulletin Board project is a community-driven initiative that 
 
 ```bash
 <<<<<<< HEAD
-git clone https://github.com/AkhilaGundeti/Lost-And-Found-Portal
-cd cd Lost-And-Found-Portal
-=======
 git clone https://github.com/Sanzzz1125/Lost_And_Found
 cd cd Lost_And_Found
 >>>>>>> 5d790049be2ce8193f32746e6cb9fb25853574b8
@@ -40,7 +37,7 @@ npm start
 ### Install client dependencies open another new gitbash window
 ```console
 <<<<<<< HEAD
-cd Lost-And-Found-Portal/Frontend
+cd Lost-And-Found/Frontend
 =======
 cd Lost_And_Found/Frontend
 >>>>>>> 5d790049be2ce8193f32746e6cb9fb25853574b8
@@ -54,6 +51,3 @@ npm start
 ```python
 The server will run on http://localhost:8000, and the client will be available at http://localhost:3000
 ```
-
-
-
